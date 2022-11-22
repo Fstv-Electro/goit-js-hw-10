@@ -63,6 +63,8 @@ function markupList(country) {
   return layoutList;
 }
 
+// comments for gh-pages/ sometimes he doesn't load before add a new changes
+
 function markupInfo(country) {
   const layoutInfo = country
     .map(({ name, flags, capital, population, languages }) => {
