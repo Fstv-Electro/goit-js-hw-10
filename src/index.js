@@ -21,13 +21,12 @@ function onCountryInput() {
   const name = refs.inputEl.value.trim();
 
   if (name === '') {
-    return (refs.listEl.innerHTML = ''), (refs.infoEl.innerHTML = '');
+    return emptyHTML();
   }
 
   fetchCountries(name)
     .then(country => {
-      refs.listEl.innerHTML = '';
-      refs.infoEl.innerHTML = '';
+      emptyHTML();
 
       if (country.length === 1) {
         refs.infoEl.insertAdjacentHTML('beforeend', markupInfo(country));
@@ -40,6 +39,11 @@ function onCountryInput() {
     .catch(wrongNameCountry);
 }
 
+function emptyHTML() {
+  refs.listEl.innerHTML = '';
+  refs.infoEl.innerHTML = '';
+}
+
 function tooManyCountries() {
   Notiflix.Notify.info(
     'Too many matches found. Please enter a more specific name.'
@@ -49,6 +53,8 @@ function tooManyCountries() {
 function wrongNameCountry() {
   Notiflix.Notify.failure('Oops, there is no country with that name');
 }
+
+// Розмітка і інфа, якщо багато співпадінь
 
 function markupList(country) {
   const layoutList = country
@@ -64,6 +70,7 @@ function markupList(country) {
 }
 
 // comments for gh-pages/ sometimes he doesn't load before add a new changes
+// Розмітка і інфа, якщо 1 співпадіння
 
 function markupInfo(country) {
   const layoutInfo = country
